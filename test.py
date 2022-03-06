@@ -1,11 +1,11 @@
-import pymssql
+from connectiondata import ConnectionData
+from contactdatasource import ContactDataSource
+from model.contact import Contact
 
-conn = pymssql.connect(server="jamescarter2001.database.windows.net", user="dts", password="DigitalTechnology2022!", database="NymptonFoodHub")
-cursor = conn.cursor()
+cd : ConnectionData = ConnectionData("jamescarter2001.database.windows.net", "dts", "", "NymptonFoodHub")
 
-cursor.execute("SELECT * from Customer")
-row = cursor.fetchone()
+contact_data_source = ContactDataSource(cd)
+test : Contact = Contact(firstname="hello", lastname="world")
+contact_data_source.add(test)
 
-conn.close()
-
-print(row)
+print("Done.")
