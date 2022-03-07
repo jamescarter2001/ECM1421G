@@ -1,4 +1,4 @@
-from datafield import DataField
+from .datafield import DataField
 
 class DataRecord:
     def __init__(self):

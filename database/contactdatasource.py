@@ -1,12 +1,13 @@
-from datasource import DataSource
-from datarecord import DataRecord
-from datafield import DataField
+from .model.datarecord import DataRecord
+from .model.datafield import DataField
+from .model.fieldtype import FieldType
+from .model.contact import Contact
 
-from model.contact import Contact
+from .datasource import DataSource
 
 class ContactDataSource(DataSource[Contact]):
-    def __init__(self, connection_data):
-        super().__init__(connection_data=connection_data, table_name="Contact")
+    def __init__(self, context):
+        super().__init__(connection_context=context, table_name="Contact")
 
     def create_model(self, row):
         customer = Contact(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11])
@@ -16,7 +17,7 @@ class ContactDataSource(DataSource[Contact]):
         record : DataRecord = DataRecord()
 
         if new == False:
-            id : DataField = DataField("id", contact.id)
+            id : DataField = DataField("id", contact.id, FieldType.number)
             record.data.append(id)
         
         firstname : DataField = DataField("firstname", contact.firstname)
@@ -34,11 +35,3 @@ class ContactDataSource(DataSource[Contact]):
         record.data.extend(list(filter(lambda f: f.data != "''", [firstname, lastname, street, town, postcode, county, phonelandline, phonemobile, phone3, email, what3words])))
 
         return record
-
-    def get_id(self, contact : Contact):
-        return contact.id
-    
-    def get_for_id(self, id):
-        for c in self.data:
-            if c.id == id:
-                return c
