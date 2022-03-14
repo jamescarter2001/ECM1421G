@@ -5,7 +5,7 @@ from database.model.contactxcustomer import ContactXCustomer
 from db import DB
 from database.model.connectiondata import ConnectionData
 
-cd : ConnectionData = ConnectionData("jamescarter2001.database.windows.net", "dts", "PASSWORD", "NymptonFoodHub")
+cd : ConnectionData = ConnectionData("jamescarter2001.database.windows.net", "dts", "PASS", "NymptonFoodHub")
 
 # DB interaction object, wrap instantiation in try-catch on login page, looping until successful connection.
 db : DB = DB(cd)
