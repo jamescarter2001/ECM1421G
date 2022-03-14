@@ -7,7 +7,7 @@ from database.orderdatasource import OrderDataSource
 from database.orderlinedatasource import OrderLineDataSource
 class DB:
     def __init__(self, connection_data : ConnectionData):
-        conn = pyodbc.connect(f'Driver=SQL Server;Server={connection_data.server};Database={connection_data.database};UID={connection_data.user};PWD={connection_data.password}')
+        conn = pyodbc.connect(f'Driver=SQL Server;Server={connection_data.server};Database={connection_data.database};UID={connection_data.user};PWD={connection_data.password};Encrypt=yes;ssl=True')
 
         self.customer_source : CustomerDataSource = CustomerDataSource(conn)
         self.order_source : OrderDataSource = OrderDataSource(conn)
